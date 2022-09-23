@@ -3,12 +3,12 @@ package model.entities;
 public class Invoice {
 
 	private Double basicPayment;
-	private double tax;
+	private Double tax;
 	
 	public Invoice() {
 	}
 
-	public Invoice(Double basicPayment, double tax) {
+	public Invoice(Double basicPayment, Double tax) {
 		this.basicPayment = basicPayment;
 		this.tax = tax;
 	}
@@ -21,15 +21,15 @@ public class Invoice {
 		this.basicPayment = basicPayment;
 	}
 
-	public double getTax() {
+	public Double getTax() {
 		return tax;
 	}
 
-	public void setTax(double tax) {
+	public void setTax(Double tax) {
 		this.tax = tax;
 	}
 	
-	public double getTotalPayment() {
+	public Double totalPayment() {
 		return getBasicPayment() + getTax();
 	}
 }

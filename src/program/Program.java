@@ -13,33 +13,32 @@ import model.services.RentalService;
 
 public class Program {
 
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException{
 		
 		Scanner sc = new Scanner(System.in);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		System.out.println("Enter rental data");
-		System.out.print("Car model: ");
-		String carModel = sc.nextLine();
-		System.out.print("Pickup (dd/MM/yyyy HH:mm): ");
+		
+		System.out.println("entre com as informações: ");
+		System.out.print("Modelo do carro: ");
+		String model = sc.nextLine();
+		System.out.print("data que o carro será pego (dd/MM/yyyy HH:mm): ");
 		Date start = sdf.parse(sc.nextLine());
-		System.out.print("Return (dd/MM/yyyy HH:mm): ");
+		System.out.print("data que o carro será entregue (dd/MM/yyyy HH:mm): ");
 		Date finish = sdf.parse(sc.nextLine());
+		CarRental cr = new CarRental(start, finish, new Vehicle(model));
 		
-		CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
-		
-		System.out.print("Enter price per hour: ");
+		System.out.print("informe o valor do aluguel por hora: ");
 		double pricePerHour = sc.nextDouble();
-		System.out.print("Enter price per day: ");
+		System.out.print("informe o valor do aluguel por dia: ");
 		double pricePerDay = sc.nextDouble();
-		
 		RentalService rs = new RentalService(pricePerHour, pricePerDay, new BrazilTaxService());
 		
-		rs.processInveice(cr);
+		rs.processInvoice(cr);
 		
-		System.out.println("INVOICE: ");
-		System.out.println("Basic payment: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
-		System.out.println("Tax: " + String.format("%.2f", cr.getInvoice().getTax()));
-		System.out.println("Total payment: " + String.format("%.2f", cr.getInvoice().getTotalPayment()));
+		System.out.println("FATURA:");
+		System.out.println("Valor básico: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
+		System.out.println("Taxa: " + String.format("%.2f", cr.getInvoice().getTax()));
+		System.out.println("Valor total: " + String.format("%.2f", cr.getInvoice().totalPayment()));
 	
 		sc.close();
 	}
